@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EPiKK Project Portal — Log In</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background:
+          radial-gradient(
+            circle at 15% 20%,
+            rgba(169, 129, 44, 0.35),
+            transparent 45%
+          ),
+          radial-gradient(
+            circle at 85% 80%,
+            rgba(217, 174, 78, 0.28),
+            transparent 45%
+          ),
+          var(--ink);
+        position: relative;
+        overflow: hidden;
+      }
+      body::before,
+      body::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.5;
+      }
+      body::before {
+        width: 420px;
+        height: 420px;
+        background: rgba(169, 129, 44, 0.35);
+        top: -120px;
+        left: -120px;
+      }
+      body::after {
+        width: 360px;
+        height: 360px;
+        background: rgba(217, 174, 78, 0.22);
+        bottom: -100px;
+        right: -80px;
+      }
+
+      .auth-card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 900px;
+        min-height: 560px;
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+      }
+      .auth-visual {
+        background: var(--ink);
+        color: #fff;
+        padding: 44px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+      }
+      .auth-visual .logo {
+        padding: 0;
+        margin-bottom: auto;
+      }
+      .auth-visual .logo-text {
+        color: #fff;
+        font-size: 19px;
+      }
+      .auth-tagline {
+        font-size: 22px;
+        font-weight: 600;
+        font-family: "Space Grotesk", sans-serif;
+        line-height: 1.35;
+        max-width: 280px;
+        position: relative;
+        z-index: 1;
+      }
+      .auth-tagline span {
+        color: var(--gold-bright);
+      }
+      .schematic {
+        position: absolute;
+        right: -40px;
+        bottom: -30px;
+        width: 340px;
+        opacity: 0.9;
+      }
+
+      .auth-form-side {
+        padding: 44px 46px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .mode-toggle {
+        display: flex;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        overflow: hidden;
+        margin-bottom: 26px;
+      }
+      .mode-toggle button {
+        flex: 1;
+        padding: 10px;
+        font-size: 12.5px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        border: none;
+        background: transparent;
+        color: var(--muted);
+      }
+      .mode-toggle button.active {
+        background: var(--ink);
+        color: var(--gold-bright);
+      }
+      .auth-title {
+        font-size: 20px;
+        margin-bottom: 4px;
+      }
+      .auth-sub {
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 24px;
+      }
+      .field {
+        margin-bottom: 16px;
+      }
+      .auth-links {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 16px;
+        font-size: 12.5px;
+      }
+      .auth-links a {
+        color: var(--gold-deep);
+        font-weight: 600;
+      }
+      .auth-links a.muted {
+        color: var(--muted);
+        font-weight: 400;
+      }
+      .panel {
+        display: none;
+      }
+      .panel.active {
+        display: block;
+        animation: fadeIn 0.2s ease;
+      }
+      .back-link {
+        font-size: 12.5px;
+        color: var(--muted);
+        display: inline-block;
+        margin-bottom: 18px;
+      }
+      .error-msg {
+        color: #b3432b;
+        font-size: 12.5px;
+        margin-top: 2px;
+      }
+      .success-msg {
+        color: var(--gold-deep);
+        font-size: 12.5px;
+        margin-top: 2px;
+        background: var(--gold-wash);
+        padding: 10px 12px;
+        border-radius: 8px;
+      }
+
+      @media (max-width: 760px) {
+        .auth-card {
+          grid-template-columns: 1fr;
+          max-width: 440px;
+        }
+        .auth-visual {
+          display: none;
+        }
+        .auth-form-side {
+          padding: 36px 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="auth-card fade-in">
+      <div class="auth-visual">
+        <div class="logo">
+          <img class="logo-image" src="assets/epikk.png" alt="EPiKK" />
+          <div class="logo-text">EPiKK</div>
+        </div>
+        <div class="auth-tagline">
+          Where engineering ideas become <span>tracked, trusted</span> progress.
+        </div>
+        <svg class="schematic" viewBox="0 0 300 260" fill="none">
+          <g stroke="#D9AE4E" stroke-width="1.4" opacity="0.55">
+            <path d="M10 40 H110 V90 H200" />
+            <path d="M30 130 H90 V180 H160 V220" />
+            <path d="M150 20 V70 H260 V150" />
+            <path d="M180 200 H240 V120" />
+            <path d="M60 90 V130" />
+          </g>
+          <g fill="#D9AE4E">
+            <circle cx="10" cy="40" r="4" />
+            <circle cx="110" cy="90" r="4" />
+            <circle cx="200" cy="90" r="4" />
+            <circle cx="30" cy="130" r="4" />
+            <circle cx="160" cy="180" r="4" />
+            <circle cx="160" cy="220" r="4" />
+            <circle cx="150" cy="20" r="4" />
+            <circle cx="260" cy="150" r="4" />
+            <circle cx="240" cy="120" r="4" />
+          </g>
+          <rect
+            x="95"
+            y="75"
+            width="30"
+            height="30"
+            rx="3"
+            stroke="#D9AE4E"
+            stroke-width="1.4"
+            opacity="0.7"
+          />
+          <rect
+            x="220"
+            y="20"
+            width="26"
+            height="26"
+            rx="3"
+            stroke="#D9AE4E"
+            stroke-width="1.4"
+            opacity="0.4"
+          />
+        </svg>
+      </div>
+
+      <div class="auth-form-side">
+        <!-- ===== LOGIN PANEL ===== -->
+        <div id="panel-login" class="panel active">
+          <div class="mode-toggle">
+            <button
+              type="button"
+              id="tab-admin"
+              class="active"
+              data-mode="admin"
+            >
+              ADMIN LOGIN
+            </button>
+            <button type="button" id="tab-client" data-mode="client">
+              CLIENT LOGIN
+            </button>
+          </div>
+          <h1 class="auth-title">Welcome back</h1>
+          <p class="auth-sub" id="login-sub">
+            Sign in with your Admin or Engineer account.
+          </p>
+          <form id="login-form">
+            <div class="field">
+              <label class="field-label">Username</label>
+              <input
+                class="input"
+                name="username"
+                id="login-username"
+                placeholder="Your username"
+                required
+              />
+            </div>
+            <div class="field">
+              <label class="field-label">Password</label>
+              <input
+                class="input"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+            <div id="login-error" class="error-msg" style="display: none"></div>
+            <button
+              type="submit"
+              class="btn btn-primary btn-block"
+              style="padding: 12px; margin-top: 8px"
+            >
+              Login
+            </button>
+          </form>
+          <div class="auth-links">
+            <a href="#" data-panel="first-time">First Time Login</a>
+            <a href="#" class="muted" data-panel="forgot">Forgot Password</a>
+          </div>
+        </div>
+
+        <!-- ===== FIRST TIME LOGIN PANEL ===== -->
+        <div id="panel-first-time" class="panel">
+          <a href="#" class="back-link" data-panel="login">← Back to login</a>
+          <h1 class="auth-title">First Time Login</h1>
+          <p class="auth-sub">
+            Activate your account with the invitation code from your Super
+            Admin.
+          </p>
+          <form id="ftl-form">
+            <div class="field">
+              <label class="field-label">Username</label
+              ><input class="input" name="username" required />
+            </div>
+            <div class="field">
+              <label class="field-label">Invitation Code</label
+              ><input
+                class="input mono"
+                name="code"
+                placeholder="EPK-XXXX-XXXX"
+                required
+              />
+            </div>
+            <div class="field">
+              <label class="field-label">Create Password</label
+              ><input
+                class="input"
+                name="password"
+                type="password"
+                required
+                minlength="4"
+              />
+            </div>
+            <div class="field">
+              <label class="field-label">Confirm Password</label
+              ><input
+                class="input"
+                name="confirm"
+                type="password"
+                required
+                minlength="4"
+              />
+            </div>
+            <div id="ftl-error" class="error-msg" style="display: none"></div>
+            <button
+              type="submit"
+              class="btn btn-primary btn-block"
+              style="padding: 12px; margin-top: 8px"
+            >
+              Set Password &amp; Continue
+            </button>
+          </form>
+        </div>
+
+        <!-- ===== FORGOT PASSWORD PANEL ===== -->
+        <div id="panel-forgot" class="panel">
+          <a href="#" class="back-link" data-panel="login">← Back to login</a>
+          <h1 class="auth-title">Forgot Password</h1>
+          <p class="auth-sub">
+            Enter your username or email and we'll send reset instructions.
+          </p>
+          <form id="forgot-form">
+            <div class="field">
+              <label class="field-label">Username or Email</label
+              ><input class="input" name="identity" required />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary btn-block"
+              style="padding: 12px; margin-top: 8px"
+            >
+              Send Reset Email
+            </button>
+          </form>
+          <div
+            id="forgot-success"
+            class="success-msg"
+            style="display: none; margin-top: 14px"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+      // Panel switching
+      document.querySelectorAll("[data-panel]").forEach((el) => {
+        el.addEventListener("click", (e) => {
+          e.preventDefault();
+          document
+            .querySelectorAll(".panel")
+            .forEach((p) => p.classList.remove("active"));
+          document
+            .getElementById("panel-" + el.getAttribute("data-panel"))
+            .classList.add("active");
+        });
+      });
+
+      // Admin / Client tab toggle
+      const subCopy = {
+        admin: "Sign in with your Admin or Engineer account.",
+        client: "Sign in with your Client account.",
+      };
+      document.querySelectorAll("#tab-admin, #tab-client").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll("#tab-admin, #tab-client")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          document.getElementById("login-sub").textContent =
+            subCopy[btn.dataset.mode];
+          document.getElementById("login-username").placeholder =
+            btn.dataset.mode === "admin"
+              ? "Your username"
+              : "Your client username";
+        });
+      });
+
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const fd = new FormData(e.target);
+          const username = fd.get("username").trim();
+          const password = fd.get("password");
+          const errorEl = document.getElementById("login-error");
+          errorEl.style.display = "none";
+
+          let email = null;
+          const { data: emailRpcData, error: lookupError } = await sb.rpc(
+            "email_for_username",
+            { uname: username },
+          );
+          if (!lookupError && emailRpcData) {
+            email = emailRpcData;
+          } else {
+            const { data: profile, error: profileError } = await sb
+              .from("profiles")
+              .select("email")
+              .eq("username", username)
+              .single();
+            if (!profileError && profile?.email) {
+              email = profile.email;
+            }
+          }
+          if (!email) {
+            errorEl.textContent = "No account found with that username.";
+            errorEl.style.display = "block";
+            return;
+          }
+
+          const { error: signInError } = await sb.auth.signInWithPassword({
+            email,
+            password,
+          });
+          if (signInError) {
+            errorEl.textContent = "Incorrect username or password.";
+            errorEl.style.display = "block";
+            return;
+          }
+
+          window.location.href = "dashboard.html";
+        });
+
+      document.getElementById("ftl-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const username = fd.get("username").trim();
+  const code = fd.get("code").trim();
+  const password = fd.get("password");
+  const errorEl = document.getElementById("ftl-error");
+  errorEl.style.display = "none";
+
+  if (password !== fd.get("confirm")) {
+    errorEl.textContent = "Passwords do not match.";
+    errorEl.style.display = "block";
+    return;
+  }
+
+  const { data: invites, error: inviteError } = await sb.rpc("get_invitation", { p_code: code });
+  const invite = invites && invites[0];
+  if (inviteError || !invite) {
+    errorEl.textContent = "Invalid or already-used invitation code.";
+    errorEl.style.display = "block";
+    return;
+  }
+  if (invite.username.toLowerCase() !== username.toLowerCase()) {
+    errorEl.textContent = "That username doesn't match this invitation code.";
+    errorEl.style.display = "block";
+    return;
+  }
+
+  const { data: signUpData, error: signUpError } = await sb.auth.signUp({
+    email: invite.email,
+    password,
+  });
+  if (signUpError) {
+    errorEl.textContent = signUpError.message;
+    errorEl.style.display = "block";
+    return;
+  }
+
+  if (signUpData.session) {
+    window.location.href = "dashboard.html";
+  } else {
+    toast("Account created — check your email to confirm before logging in.");
+    setTimeout(() => { document.querySelector('[data-panel="login"]').click(); }, 1200);
+  }
+});
+
+      document.getElementById("forgot-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const successEl = document.getElementById("forgot-success");
+        successEl.textContent = `If an account matches "${fd.get("identity")}", reset instructions would be sent (no email is actually sent in this preview).`;
+        successEl.style.display = "block";
+      });
+    </script>
+  </body>
+</html>
